@@ -14,8 +14,8 @@ import os
 import math
 
 cwd = os.getcwd()
-imgdir = cwd + '\\SlipPhotos'
-savedir = cwd + '\\Photos TextAdded'
+imgdir = cwd + '/SlipPhotos'
+savedir = cwd + '/Photos TextAdded'
 images = os.listdir(imgdir)
 
  
@@ -26,7 +26,7 @@ images = os.listdir(imgdir)
 # the image object as background
 
 # import increments
-tracker = pd.read_csv(os.getcwd() + '\\Tracker.csv')
+tracker = pd.read_csv(os.getcwd() + '/Tracker.csv')
 
 # create font object with the font file and specify
 # desired size 
@@ -41,26 +41,15 @@ for i in range(0,len(tracker)):
     iphone = tracker['iphone'][i]
     
     
-    font = ImageFont.truetype('Roboto-Bold.ttf', size=45)
-    font2 = ImageFont.truetype('Roboto-Bold.ttf', size=65)
-    x = 50
-    y1 = 50
-    y2 = 100
-    y3 = 150
-    y4 = 250
-    
-    # make image bigger to work for iphone photos.
-    if not pd.isnull(iphone):
-        font = ImageFont.truetype('Roboto-Bold.ttf', size=90)
-        font2 = ImageFont.truetype('Roboto-Bold.ttf', size=130)
+    font = ImageFont.truetype('Roboto-Bold.ttf', size=90)
+    font2 = ImageFont.truetype('Roboto-Bold.ttf', size=130)
+    x = 100
+    y1 = 100
+    y2 = 200
+    y3 = 300
+    y4 = 500
         
-        x = 100
-        y1 = 100
-        y2 = 200
-        y3 = 300
-        y4 = 500
-        
-    image = Image.open(imgdir + '\\' + tag + '.jpg')
+    image = Image.open(imgdir + '/' + tag + '.jpg')
     draw = ImageDraw.Draw(image)
     
     # flip if orientation in photo is incorrect
@@ -74,9 +63,9 @@ for i in range(0,len(tracker)):
     draw.text((x, y), name, fill=color, font=font)
     
     (x, y) = (x, y2)
-    name = price
+    name = '$'+str(price)
     color = 'rgb(255, 255, 255)' # white color
-    draw.text((x, y), name, fill=color, font=font)
+    draw.text((x, y), str(name), fill=color, font=font)
     
     if not pd.isnull(size):
         (x, y) = (x, y3)
@@ -92,4 +81,4 @@ for i in range(0,len(tracker)):
     
     
     # save the edited image
-    image.save(savedir + '\\' + tag + '.jpg')
+    image.save(savedir + '/' + tag + '.jpg')
